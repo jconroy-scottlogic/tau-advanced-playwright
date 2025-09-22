@@ -10,7 +10,7 @@ let apiContext: APIRequestContext;
 const env = process.env.ENV!;
 const password = process.env.PASSWORD!;
 const userId = process.env.USERID!;
-const userName = process.env.USERNAME1!;
+const userName = process.env.USERNAME!;
 
 test.beforeAll(async ({ playwright }) => {
   // apiContext = await playwright.request.newContext({ storageState: 'storageState.json' });

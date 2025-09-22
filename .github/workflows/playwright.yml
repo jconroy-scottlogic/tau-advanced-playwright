@@ -6,12 +6,12 @@ on:
     branches: [main, master]
 
 env:
-  USERNAME1: ${{ secrets.USERNAME1 }}
+  USERNAME: ${{ secrets.USERNAME }}
   PASSWORD: ${{ secrets.PASSWORD }}
   USERID: ${{ secrets.USERID }}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  USERNAME1_ADMIN: ${{ secrets.USERNAME1_ADMIN }}
-  USERNAME1_USER: ${{ secrets.USERNAME1_USER }}
+  USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+  USERNAME_USER: ${{ secrets.USERNAME_USER }}
   APITOKEN: ${{ secrets.APITOKEN }}
   APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
   ENV: ${{ vars.ENV }}
