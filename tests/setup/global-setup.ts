@@ -1,4 +1,4 @@
-import { chromium, FullConfig } from "@playwright/test";
+import { chromium, firefox, FullConfig, webkit } from "@playwright/test";
 import LoginPage from "../ui/pages/login-page";
 import uiPages from "../utils/uiPages";
 
