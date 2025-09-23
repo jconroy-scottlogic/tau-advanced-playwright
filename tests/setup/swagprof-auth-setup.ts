@@ -5,7 +5,7 @@ const authFile = "playwright/.auth/user.json";
 const adminFile = ".auth/admin.json";
 
 setup("authenticate as admin", async ({ page }) => {
-  const user = "standard_user";
+  const user = "problem_user";
   const password = "secret_sauce";
   await doLogin(page, user, password);
 
