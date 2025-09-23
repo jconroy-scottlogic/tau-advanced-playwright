@@ -1,6 +1,5 @@
 import { test } from "@playwright/test";
-import SwagLoginPage from "../pages/swagprof-login-page";
-import ProfilePage from "../pages/profile-page";
+import SwagLoginPage from "../../pages/swagprof-login-page";
 
 const userName = "standard_user";
 const password = "secret_sauce";
