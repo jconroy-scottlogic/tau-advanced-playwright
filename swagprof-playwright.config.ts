@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 import baseEnvUrl from "./tests/utils/environmentBaseUrl";
 
-require("dotenv").config();
+require("dotenv").config({ path: "./.env", override: true });
 
 export default defineConfig({
   globalSetup: require.resolve("./tests/setup/swagprof-global-setup"),
