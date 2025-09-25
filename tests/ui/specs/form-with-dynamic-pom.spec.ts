@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe.only("Form - Dynamic Page Object Model", () => {
-  test("Assert form is submitted", async ({ page }) => {
+  test("Assert form is submitted", async () => {
     await formPage.submitForm();
   });
 });
