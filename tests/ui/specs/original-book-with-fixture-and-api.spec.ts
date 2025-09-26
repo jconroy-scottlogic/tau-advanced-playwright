@@ -1,9 +1,8 @@
-import { test } from "../fixtures/bookadd-fixture";
-import { APIRequestContext, expect, Page } from "@playwright/test";
+import { test } from "../fixtures/books-fixture";
+import { APIRequestContext, Page } from "@playwright/test";
 import baseAPIUrl from "../../utils/environmentBaseUrl";
 import deleteBookAPIRequest from "../../api/requests/delete-books-collection";
 import userData from "../../data/user-data";
-import addBook from "../../api/requests/create-books-collection";
 
 test.describe.configure({ mode: "serial" });
 
@@ -12,8 +11,6 @@ const env = process.env.ENV!;
 const password = process.env.PASSWORD!;
 const userId = process.env.USERID!;
 const userName = process.env.USERNAME!;
-const isbn = "9781449331818";
-const isbn2 = "9781449365035";
 
 test.beforeAll(async ({ playwright }) => {
   //apiContext = await playwright.request.newContext({ storageState: 'storageState.json' });
@@ -30,34 +27,18 @@ test.beforeAll(async ({ playwright }) => {
   });
 });
 
-test.describe.only("Books - Fixture & API", () => {
+test.describe("Books - Fixture & API", () => {
   // The scope of use is file or describe
   test.use({ isDupe: false });
-  test("Delete one book from collection", async ({ page, bookPage }) => {
-    //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
-    await cleanBooks(userId, page);
-    await addBooks(apiContext, userId, isbn);
-    await addBooks(apiContext, userId, isbn2);
-    await deleteOneBook(apiContext, userId, isbn);
-
-    //await bookPage.goto(userData.books.new);
-  });
-
   test("Add brand new book", async ({ page, bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
-    await addBooks(apiContext, userId, isbn);
-
-    //await bookPage.goto(userData.books.new);
+    await bookPage.goto(userData.books.new);
   });
 });
 
-async function addBooks(
-  apiContext: APIRequestContext,
-  userId: string,
-  isbn: string
-) {
-  await addBook.addBookToCollection(apiContext, userId, isbn);
+async function add(userId: string, page: Page) {
+  await deleteBookAPIRequest.deleteAllBooksByUser(apiContext, userId);
   // await page.reload();
 }
 
@@ -65,19 +46,6 @@ async function cleanBooks(userId: string, page: Page) {
   await deleteBookAPIRequest.deleteAllBooksByUser(apiContext, userId);
   // await page.reload();
 }
-
-async function deleteOneBook(
-  apiContext: APIRequestContext,
-  userId: string,
-  isbn: string
-) {
-  await deleteBookAPIRequest.deleteBookAPIByIsbn(apiContext, userId, isbn);
-}
-// Test
-// Add one book
-// add second book
-// delete first book
-// assrty only second book shwon
 
 /**
  * 1. import the fixture file instead of the @playwright/test
