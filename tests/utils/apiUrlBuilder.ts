@@ -1,17 +1,6 @@
 import apiPath from "./apiPaths";
 import baseAPIUrl from "./environmentBaseUrl";
 import endpoints from "./apiEndpoints";
-import apiPath from "./apiPaths";
-import baseAPIUrl from "./environmentBaseUrl";
-import endpoints from "./apiEndpoints";
-
-function bindUrl(
-  endpoint: string,
-  env: string,
-  userId?: string,
-  isbn?: string
-) {
-  const parts = endpoint.replace(/\/.+$/, "").split(".");
 
 function bindUrl(
   endpoint: string,
@@ -27,10 +16,8 @@ function bindUrl(
         return baseAPIUrl.local.api;
       default:
         return apiPath[part] ?? "/";
-        return apiPath[part] ?? "/";
     }
   });
-
 
   if (endpoint === endpoints.account.get) {
     endpointParts.push(userId);
@@ -40,7 +27,6 @@ function bindUrl(
   }
 
   return endpointParts.join("/");
-  return endpointParts.join("/");
 }
 
 function searchParamsForUrl(page: string, userId?: string) {
@@ -48,7 +34,6 @@ function searchParamsForUrl(page: string, userId?: string) {
 
   switch (page) {
     case endpoints.books.delete:
-      queryParams = { UserId: userId };
       queryParams = { UserId: userId };
       break;
     default:
@@ -64,9 +49,6 @@ export function buildUrl(endpoint: string, userId?: string, isbn?: string) {
     bindUrl(endpoint, env, userId, isbn),
     searchParamsForUrl(endpoint, userId),
   ]
-    .filter(Boolean)
-    .join("?");
-
     .filter(Boolean)
     .join("?");
 
