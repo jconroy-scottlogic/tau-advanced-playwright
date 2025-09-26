@@ -14,7 +14,7 @@ env:
   USERNAME_USER: ${{ secrets.USERNAME_USER }}
   APITOKEN: ${{ secrets.APITOKEN }}
   APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  ENV: ${{ vars.ENV }}
+  ENV: ${{ vars.NODE_ENV }}
 
 jobs:
   test:

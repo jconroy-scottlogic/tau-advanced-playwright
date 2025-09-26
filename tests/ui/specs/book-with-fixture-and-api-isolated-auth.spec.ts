@@ -8,7 +8,7 @@
 // import pages from "../../utils/pages";
 // import userData from "../../data/user-data";
 
-// const env = process.env.ENV!;
+// const env = process.env.NODE_ENV!;
 // const password = process.env.PASSWORD!;
 // const userId = process.env.USERID!;
 // const userName = process.env.USERNAME!;
