@@ -12,12 +12,13 @@ export default defineConfig({
   reporter: "html",
   // timeout: 5000,
   use: {
-    // storageState: 'storageState.json',
+    screenshot: "only-on-failure",
+    storageState: "storageState.json",
     trace: "on",
     baseURL:
-      process.env.ENV === "production"
+      process.env.NODE_ENV === "production"
         ? baseEnvUrl.production.home
-        : process.env.ENV === "staging"
+        : process.env.NODE_ENV === "staging"
         ? baseEnvUrl.staging.home
         : baseEnvUrl.local.home,
   },
