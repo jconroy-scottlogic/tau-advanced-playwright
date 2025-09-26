@@ -35,13 +35,13 @@ export default defineConfig({
         storageState: "storageState.json",
       },
     },
-    // {
-    //   name: "chromium-auth",
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //     // storageState: '.auth/admin.json', //use this in case you have multiple projects one per user
-    //   },
-    //   dependencies: ["auth-setup"],
-    // },
+    {
+      name: "chromium-auth",
+      use: {
+        ...devices["Desktop Chrome"],
+        // storageState: '.auth/admin.json', //use this in case you have multiple projects one per user
+      },
+      dependencies: ["auth-setup"],
+    },
   ],
 });
