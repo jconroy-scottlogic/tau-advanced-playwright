@@ -32,7 +32,7 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        //storageState: "storageState.json",
+        storageState: "storageState.json",
       },
     },
     {
