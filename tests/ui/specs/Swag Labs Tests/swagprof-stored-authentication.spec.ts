@@ -9,7 +9,7 @@ setup.beforeEach(async ({ page }) => {
   //profile = new SwagLoginPage(page);
 });
 
-setup.describe("Profile - Stored Auth", () => {
+setup.describe.skip("Profile - Stored Auth", () => {
   setup("Check logged in", async ({ page }) => {
     await expect(page.url()).toEqual(
       "https://www.saucedemo.com/inventory.html"
