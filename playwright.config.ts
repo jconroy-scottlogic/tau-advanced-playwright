@@ -4,7 +4,7 @@ import baseEnvUrl from "./tests/utils/environmentBaseUrl";
 require("dotenv").config({ path: "./.env", override: true });
 
 export default defineConfig({
-  globalSetup: require.resolve("./tests/setup/swagprof-global-setup"),
+  globalSetup: require.resolve("./tests/setup/global-setup"),
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 0,
@@ -12,12 +12,13 @@ export default defineConfig({
   reporter: "html",
   // timeout: 5000,
   use: {
+    screenshot: "only-on-failure",
     storageState: "storageState.json",
     trace: "on",
     baseURL:
-      process.env.ENV === "production"
+      process.env.NODE_ENV === "production"
         ? baseEnvUrl.production.home
-        : process.env.ENV === "staging"
+        : process.env.NODE_ENV === "staging"
         ? baseEnvUrl.staging.home
         : baseEnvUrl.local.home,
   },

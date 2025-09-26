@@ -14,7 +14,7 @@ env:
   USERNAME_USER: ${{ secrets.USERNAME_USER }}
   APITOKEN: ${{ secrets.APITOKEN }}
   APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  ENV: ${{ vars.ENV }}
+  NODE_ENV: ${{ vars.NODE_ENV }}
 
 jobs:
   test:
@@ -29,16 +29,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright@1.35.0 install --with-deps
+        run: npx playwright@1.55.0 install --with-deps
       - name: Run Playwright tests
         run: npm run test-ui-c
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: index.html
           path: playwright-report/index.html
           retention-days: 30
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results

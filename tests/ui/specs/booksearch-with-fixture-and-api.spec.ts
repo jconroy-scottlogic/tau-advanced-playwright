@@ -1,4 +1,4 @@
-// import { test } from "../fixtures/books-fixture";
+// import { test } from "../fixtures/booksearch-fixture";
 // import { APIRequestContext, Page } from "@playwright/test";
 // import baseAPIUrl from "../../utils/environmentBaseUrl";
 // import deleteBookAPIRequest from "../../api/requests/delete-books-collection";
@@ -7,15 +7,15 @@
 // test.describe.configure({ mode: "serial" });
 
 // let apiContext: APIRequestContext;
-// const env = process.env.NODE_ENV!;
 // const password = process.env.PASSWORD!;
-// const userId = process.env.USERID!;
 // const userName = process.env.USERNAME!;
-
+// const book = "You Don't Know JS";
+// const books = "java";
+// const nobook = "playwright";
 // test.beforeAll(async ({ playwright }) => {
 //   //apiContext = await playwright.request.newContext({ storageState: 'storageState.json' });
 //   apiContext = await playwright.request.newContext({
-//     baseURL: baseAPIUrl[env].api,
+//     baseURL: baseAPIUrl.local.api,
 //     extraHTTPHeaders: {
 //       // Authorization: `Basic ${apiToken}`,
 //       Authorization: `Basic ${Buffer.from(`${userName}:${password}`).toString(
@@ -32,8 +32,23 @@
 //   test.use({ isDupe: false });
 //   test("Add brand new book", async ({ page, bookPage }) => {
 //     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
-//     await cleanBooks(userId, page);
-//     await bookPage.goto(userData.books.new);
+//     await bookPage.searchOneBook(book);
+
+//     await bookPage.checkTitle();
+//   });
+//   test.use({ isDupe: false });
+//   test("Search multiple books", async ({ page, bookPage }) => {
+//     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
+//     await bookPage.searchMutlipleBooks(books);
+
+//     await bookPage.checkMultipleTitles();
+//   });
+//   test.use({ isDupe: false });
+//   test("Search no existing books", async ({ page, bookPage }) => {
+//     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
+//     await bookPage.searchNoBook(nobook);
+
+//     await bookPage.checkNoResults();
 //   });
 // });
 
