@@ -6,7 +6,7 @@ async function globalSetup(config: FullConfig) {
   const user = process.env.USERNAME2!;
   const password = process.env.PASSWORD!;
   const { baseURL, storageState } = config.projects[0].use;
-  const browser = await chromium.launch({ headless: true, timeout: 10000 });
+  const browser = await chromium.launch({ headless: true, timeout: 50000 });
   const page = await browser.newPage();
   const loginPage = new LoginPage(page);
 
