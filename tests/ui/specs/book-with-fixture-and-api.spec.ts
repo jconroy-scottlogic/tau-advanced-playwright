@@ -13,9 +13,10 @@ const env = process.env.ENV!;
 const password = process.env.PASSWORD!;
 const userId = process.env.USERID!;
 const userName = process.env.USERNAME2!;
-const isbn = "9781449331818";
+const isbn = "9781593277574";
 const isbn2 = "9781449365035";
-//const profile: SearchPage;
+let profile: SearchPage;
+
 test.beforeAll(async ({ playwright }) => {
   //apiContext = await playwright.request.newContext({ storageState: 'storageState.json' });
   apiContext = await playwright.request.newContext({
@@ -49,7 +50,8 @@ test.describe("Books - Fixture & API", () => {
     await cleanBooks(userId, page);
     await addBooks(apiContext, userId, isbn);
     await page.goto("https://demoqa.com/profile");
-    //await assertBook;
+    let profile = new SearchPage(page);
+    profile.assertBook();
     // expect(profile.assertBook());
     //await bookPage.goto(userData.books.new);
   });

@@ -51,9 +51,7 @@ class SearchPage {
   }
 
   async assertBook() {
-    expect(
-      this.page.getByText("Learning JavaScript Design Patterns")
-    ).toBeVisible();
+    expect(this.page.getByText("Understanding ECMAScript 6")).toBeVisible();
   }
 
   async sortBooksList() {
