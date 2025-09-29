@@ -13,7 +13,7 @@ function bindUrl(
   const endpointParts = parts.map((part) => {
     switch (part) {
       case "api":
-        return baseAPIUrl[env].api;
+        return baseAPIUrl.local.api;
       default:
         return apiPath[part] ?? "/";
     }
@@ -34,8 +34,10 @@ function searchParamsForUrl(page: string, userId?: string) {
 
   switch (page) {
     case endpoints.books.delete:
-      queryParams = { UserId: userId };
-      break;
+      if (userId) {
+        queryParams = { UserId: userId };
+        break;
+      }
     default:
       queryParams = {};
   }
@@ -56,6 +58,12 @@ export function buildUrl(endpoint: string, userId?: string, isbn?: string) {
 }
 
 /**
+ * endpoint  api.books/delete
+ * parts  [ 'api', 'books' ]
+ * endpointParts  [ 'https://demoqa.com', 'BookStore/v1/Books' ]
+ * endpointParts join  https://demoqa.com/BookStore/v1/Books
+ * queryParams { UserId: '1117e3d4-9f6e-45a7-a8a9-db3ecf7b9603' }
+ * url  https://demoqa.com/BookStore/v1/Books?UserId=1117e3d4-9f6e-45a7-a8a9-db3ecf7b9603
  * endpoint  api.books/delete
  * parts  [ 'api', 'books' ]
  * endpointParts  [ 'https://demoqa.com', 'BookStore/v1/Books' ]

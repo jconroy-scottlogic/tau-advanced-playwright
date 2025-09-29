@@ -5,10 +5,10 @@ require("dotenv").config({ path: "./.env", override: true });
 
 export default defineConfig({
   globalSetup: require.resolve("./tests/setup/global-setup"),
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: undefined,
+  workers: 1,
   reporter: "html",
   // timeout: 5000,
   use: {
@@ -32,7 +32,6 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        storageState: "storageState.json",
       },
     },
     {
