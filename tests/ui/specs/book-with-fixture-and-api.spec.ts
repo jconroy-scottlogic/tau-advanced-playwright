@@ -34,12 +34,10 @@ test.beforeAll(async ({ playwright }) => {
 test.describe("Books - Fixture & API", () => {
   // The scope of use is file or describe
   test.use({ isDupe: false });
-  test.only("Delete one book from collection", async ({ page, bookPage }) => {
+  test("Delete one book from collection", async ({ page, bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
-
     const addResponse = await addBooks(apiContext, userId, isbn);
-
     await addBooks(apiContext, userId, isbn2);
     const deleteResponse = await deleteOneBook(apiContext, userId, isbn);
     console.log(addResponse);
@@ -51,7 +49,8 @@ test.describe("Books - Fixture & API", () => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
     await addBooks(apiContext, userId, isbn);
-    // await page.goto("https://demoqa.com/profile");
+    await page.goto("https://demoqa.com/profile");
+    await assertBook;
     // expect(profile.assertBook());
     //await bookPage.goto(userData.books.new);
   });
