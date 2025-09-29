@@ -3,6 +3,7 @@ import { APIRequestContext, expect, Page } from "@playwright/test";
 import baseAPIUrl from "../../utils/environmentBaseUrl";
 import deleteBookAPIRequest from "../../api/requests/delete-books-collection";
 import userData from "../../data/user-data";
+import SearchPage from "../../ui/pages/profile-page";
 import addBook from "../../api/requests/create-books-collection";
 
 // test.describe.configure({ mode: "serial" });
@@ -14,7 +15,7 @@ const userId = process.env.USERID!;
 const userName = process.env.USERNAME!;
 const isbn = "9781449331818";
 const isbn2 = "9781449365035";
-
+//const profile: SearchPage;
 test.beforeAll(async ({ playwright }) => {
   //apiContext = await playwright.request.newContext({ storageState: 'storageState.json' });
   apiContext = await playwright.request.newContext({
@@ -30,16 +31,19 @@ test.beforeAll(async ({ playwright }) => {
   });
 });
 
-test.describe.only("Books - Fixture & API", () => {
+test.describe("Books - Fixture & API", () => {
   // The scope of use is file or describe
   test.use({ isDupe: false });
-  test("Delete one book from collection", async ({ page, bookPage }) => {
+  test.only("Delete one book from collection", async ({ page, bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
-    await addBooks(apiContext, userId, isbn);
-    await addBooks(apiContext, userId, isbn2);
-    await deleteOneBook(apiContext, userId, isbn);
 
+    const addResponse = await addBooks(apiContext, userId, isbn);
+
+    await addBooks(apiContext, userId, isbn2);
+    const deleteResponse = await deleteOneBook(apiContext, userId, isbn);
+    console.log(addResponse);
+    console.log(deleteResponse);
     //await bookPage.goto(userData.books.new);
   });
 
@@ -47,7 +51,8 @@ test.describe.only("Books - Fixture & API", () => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
     await addBooks(apiContext, userId, isbn);
-
+    // await page.goto("https://demoqa.com/profile");
+    // expect(profile.assertBook());
     //await bookPage.goto(userData.books.new);
   });
 });

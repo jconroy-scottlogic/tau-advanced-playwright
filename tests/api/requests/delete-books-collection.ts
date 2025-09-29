@@ -42,13 +42,14 @@ async function deleteBookAPIByIsbn(
 ) {
   const method = methods.delete;
   const requestOptions = { data: { isbn: isbn, userId: userId } };
-  const requestUrl = buildUrl(endpoints.books.delete, userId, isbn);
+  const requestUrl = buildUrl(endpoints.books.delete);
   const response = await executeRequest(
     apiContext,
     requestUrl,
     method,
     requestOptions
   );
+  return response;
 }
 
 export default {

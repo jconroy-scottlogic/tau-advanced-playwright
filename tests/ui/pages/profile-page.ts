@@ -1,6 +1,11 @@
-import { type Page, type Locator , expect, type BrowserContext } from '@playwright/test';
-import bookListData from '../../data/book-list-data';
-import apiPaths from '../../utils/apiPaths';
+import {
+  type Page,
+  type Locator,
+  expect,
+  type BrowserContext,
+} from "@playwright/test";
+import bookListData from "../../data/book-list-data";
+import apiPaths from "../../utils/apiPaths";
 
 class SearchPage {
   readonly page: Page;
@@ -12,30 +17,43 @@ class SearchPage {
   readonly notLoggedInLabel: Locator;
   readonly searchField: Locator;
   readonly titleHeaderLabel: Locator;
-  
+
   constructor(page: Page) {
     this.page = page;
-    this.bookAdminLabel = page.getByText('Eloquent JavaScript, Second Edition');
+    this.bookAdminLabel = page.getByText("Eloquent JavaScript, Second Edition");
     this.booksCollectionRequestRegExp = new RegExp(apiPaths.account);
-    this.bookUserLabel = page.getByText('Understanding ECMAScript 6');
-    this.gridRow1 = page.locator('div:nth-child(1) > .rt-tr > div:nth-child(2)').last();
-    this.gridRow2 = page.locator('div:nth-child(2) > .rt-tr > div:nth-child(2)');
-    this.notLoggedInLabel = page.getByText('Currently you are not logged into the Book Store application, please visit the login page to enter or register page to register yourself.');
-    this.searchField = page.getByPlaceholder('Type to search');
-    this.titleHeaderLabel = page.getByText('Title');
+    this.bookUserLabel = page.getByText("Understanding ECMAScript 6");
+    this.gridRow1 = page
+      .locator("div:nth-child(1) > .rt-tr > div:nth-child(2)")
+      .last();
+    this.gridRow2 = page.locator(
+      "div:nth-child(2) > .rt-tr > div:nth-child(2)"
+    );
+    this.notLoggedInLabel = page.getByText(
+      "Currently you are not logged into the Book Store application, please visit the login page to enter or register page to register yourself."
+    );
+    this.searchField = page.getByPlaceholder("Type to search");
+    this.titleHeaderLabel = page.getByText("Title");
   }
 
   async fillSearchField(q: string) {
     await this.searchField.fill(q);
   }
 
-  async checkSearchResult(q: string, items: string) {
-  }
+  async checkSearchResult(q: string, items: string) {}
 
   async checkBooksList() {
-    for (const book of bookListData.books){
-      await expect(this.page.getByRole('link', { name: book.title })).toBeVisible();
+    for (const book of bookListData.books) {
+      await expect(
+        this.page.getByRole("link", { name: book.title })
+      ).toBeVisible();
     }
+  }
+
+  async assertBook() {
+    expect(
+      this.page.getByText("Learning JavaScript Design Patterns")
+    ).toBeVisible();
   }
 
   async sortBooksList() {
@@ -62,13 +80,14 @@ class SearchPage {
     await expect(this.gridRow2).toContainText(bookListData.books[0].title);
   }
 
-  async getBooksList() {
-  }
+  async getBooksList() {}
 
   async mockBooksListResponse(context: BrowserContext) {
-    await context.route(this.booksCollectionRequestRegExp, (route) => route.fulfill({
-      body: JSON.stringify({...(bookListData)})
-    }));
+    await context.route(this.booksCollectionRequestRegExp, (route) =>
+      route.fulfill({
+        body: JSON.stringify({ ...bookListData }),
+      })
+    );
   }
 }
 
