@@ -34,8 +34,10 @@ function searchParamsForUrl(page: string, userId?: string) {
 
   switch (page) {
     case endpoints.books.delete:
-      queryParams = { UserId: userId };
-      break;
+      if (userId) {
+        queryParams = { UserId: userId };
+        break;
+      }
     default:
       queryParams = {};
   }

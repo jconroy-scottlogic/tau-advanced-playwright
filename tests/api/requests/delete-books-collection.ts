@@ -19,21 +19,21 @@ async function deleteAllBooksByUser(
   );
 }
 
-async function deleteOneBookByUser(
-  apiContext: APIRequestContext,
-  userId: string,
-  isbn: string
-) {
-  const method = methods.delete;
-  const requestOptions = {};
-  const requestUrl = buildUrl(endpoints.books.delete, userId, isbn);
-  const response = await executeRequest(
-    apiContext,
-    requestUrl,
-    method,
-    requestOptions
-  );
-}
+// async function deleteOneBookByUser(
+//   apiContext: APIRequestContext,
+//   userId: string,
+//   isbn: string
+// ) {
+//   const method = methods.delete;
+//   const requestOptions = {};
+//   const requestUrl = buildUrl(endpoints.books.delete, userId, isbn);
+//   const response = await executeRequest(
+//     apiContext,
+//     requestUrl,
+//     method,
+//     requestOptions
+//   );
+// }
 
 async function deleteBookAPIByIsbn(
   apiContext: APIRequestContext,
@@ -42,7 +42,7 @@ async function deleteBookAPIByIsbn(
 ) {
   const method = methods.delete;
   const requestOptions = { data: { isbn: isbn, userId: userId } };
-  const requestUrl = buildUrl(endpoints.books.delete);
+  const requestUrl = buildUrl(endpoints.book.delete);
   const response = await executeRequest(
     apiContext,
     requestUrl,
@@ -55,5 +55,4 @@ async function deleteBookAPIByIsbn(
 export default {
   deleteAllBooksByUser,
   deleteBookAPIByIsbn,
-  deleteOneBookByUser,
 };

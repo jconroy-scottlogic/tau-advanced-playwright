@@ -12,7 +12,7 @@ let apiContext: APIRequestContext;
 const env = process.env.ENV!;
 const password = process.env.PASSWORD!;
 const userId = process.env.USERID!;
-const userName = process.env.USERNAME!;
+const userName = process.env.USERNAME2!;
 const isbn = "9781449331818";
 const isbn2 = "9781449365035";
 //const profile: SearchPage;
@@ -37,11 +37,10 @@ test.describe("Books - Fixture & API", () => {
   test("Delete one book from collection", async ({ page, bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await cleanBooks(userId, page);
-    const addResponse = await addBooks(apiContext, userId, isbn);
+    await addBooks(apiContext, userId, isbn);
     await addBooks(apiContext, userId, isbn2);
-    const deleteResponse = await deleteOneBook(apiContext, userId, isbn);
-    console.log(addResponse);
-    console.log(deleteResponse);
+    await deleteOneBook(apiContext, userId, isbn);
+
     //await bookPage.goto(userData.books.new);
   });
 
