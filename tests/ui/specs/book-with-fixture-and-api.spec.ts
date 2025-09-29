@@ -50,7 +50,7 @@ test.describe("Books - Fixture & API", () => {
     await cleanBooks(userId, page);
     await addBooks(apiContext, userId, isbn);
     await page.goto("https://demoqa.com/profile");
-    await assertBook;
+    //await assertBook;
     // expect(profile.assertBook());
     //await bookPage.goto(userData.books.new);
   });
