@@ -62,7 +62,8 @@ async function addBooks(
   userId: string,
   isbn: string
 ) {
-  await addBook.addBookToCollection(apiContext, userId, isbn);
+  const response = await addBook.addBookToCollection(apiContext, userId, isbn);
+  console.log(response);
   // await page.reload();
 }
 
@@ -76,7 +77,12 @@ async function deleteOneBook(
   userId: string,
   isbn: string
 ) {
-  await deleteBookAPIRequest.deleteBookAPIByIsbn(apiContext, userId, isbn);
+  const response = await deleteBookAPIRequest.deleteBookAPIByIsbn(
+    apiContext,
+    userId,
+    isbn
+  );
+  console.log(response);
 }
 // Test
 // Add one book
