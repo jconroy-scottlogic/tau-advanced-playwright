@@ -1,16 +1,19 @@
 import { type Page, type Locator, expect } from "@playwright/test";
 import { buildUrl } from "../../utils/uiUrlBuilder";
 import pages from "../../utils/pages";
+import searchData from "../../data/search-data";
 
 class BookSearchPage {
   readonly page: Page;
   readonly searchBar: Locator;
   readonly isbnLabel: Locator;
+  readonly bookRow: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.searchBar = page.getByRole("textbox", { name: "Type to search" });
     this.isbnLabel = page.locator("#ISBN-wrapper").nth(1);
+    this.bookRow = page.getByRole("rowgroup");
   }
 
   async goto(isbn: string) {
@@ -19,20 +22,27 @@ class BookSearchPage {
     await this.page.goto(url);
   }
 
-  async searchOneBook(book: string) {
-    await this.searchBar.fill(book);
+  async searchOneBook() {
+    await this.searchBar.fill(searchData.searchOne);
   }
 
-  async searchMutlipleBooks(Books: string) {
-    await this.searchBar.fill(Books);
+  async searchMutlipleBooks() {
+    await this.searchBar.fill(searchData.searchMulti);
   }
 
-  async searchNoBook(nobook: string) {
-    await this.searchBar.fill(nobook);
+  async searchNoBook() {
+    await this.searchBar.fill(searchData.searchNothing);
   }
 
   async checkTitle() {
     expect(this.page.getByText("Kyle Simpson")).toBeVisible();
+  }
+
+  async assertSearchNumber(expectedResult: number) {
+    const title = this.bookRow.getByRole("link");
+    const resultCount = await title.count();
+
+    expect(resultCount).toEqual(expectedResult);
   }
 
   async checkMultipleTitles() {

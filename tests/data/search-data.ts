@@ -1,0 +1,5 @@
+export default {
+  searchOne: "You Don't Know JS",
+  searchMulti: "java",
+  searchNothing: "playwright",
+};

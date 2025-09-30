@@ -7,6 +7,8 @@ import {
 } from "@playwright/test";
 import { buildUrl } from "../../utils/uiUrlBuilder";
 import pages from "../../utils/pages";
+import formInfo from "../../data/form-data.ts";
+import formData from "../../data/form-data.ts";
 
 class FormPage {
   readonly page: Page;
@@ -38,20 +40,20 @@ class FormPage {
   }
 
   async fillName() {
-    await this.firstName.fill("Mo");
-    await this.lastName.fill("Bama");
+    await this.firstName.fill(formData.firstName);
+    await this.lastName.fill(formData.lastName);
   }
 
   async fillEmail() {
-    await this.email.fill("bigmo@gmail.com");
+    await this.email.fill(formData.email);
   }
 
   async selectGender() {
-    this.page.getByRole("radio", { name: "Male", exact: true });
+    this.page.getByRole("radio", { name: formData.gender, exact: true });
   }
 
   async fillMobile() {
-    await this.mobile.fill("0875966231");
+    await this.mobile.fill(formData.mobileNumber);
   }
 
   async submitForm() {
