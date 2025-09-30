@@ -28,21 +28,21 @@ test.beforeAll(async ({ playwright }) => {
 test.describe("Books - Fixture & API", () => {
   // The scope of use is file or describe
   test.use({ isDupe: false });
-  test("Search one book", async ({ page, bookPage }) => {
+  test("Search one book", async ({ bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await bookPage.searchOneBook();
 
     await bookPage.assertSearchNumber(1);
   });
   test.use({ isDupe: false });
-  test("Search multiple books", async ({ page, bookPage }) => {
+  test("Search multiple books", async ({ bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await bookPage.searchMutlipleBooks();
 
     await bookPage.assertSearchNumber(4);
   });
   test.use({ isDupe: false });
-  test("Search no existing books", async ({ page, bookPage }) => {
+  test("Search no existing books", async ({ bookPage }) => {
     //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
     await bookPage.searchNoBook();
 
