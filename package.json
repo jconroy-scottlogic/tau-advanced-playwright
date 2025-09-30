@@ -19,5 +19,8 @@
     "@applitools/eyes-playwright": "^1.17.5",
     "@playwright/test": "^1.55.0",
     "dotenv": "^16.1.4"
+  },
+  "dependencies": {
+    "csv-parse": "^6.1.0"
   }
 }
