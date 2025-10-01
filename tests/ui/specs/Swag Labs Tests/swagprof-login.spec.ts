@@ -1,8 +1,9 @@
 import { test } from "@playwright/test";
 import SwagLoginPage from "../../pages/swagprof-login-page";
+import swagData from "../../../data/swag-user-data";
 
-const userName = "standard_user";
-const password = "secret_sauce";
+const userName = swagData.userName;
+const password = swagData.lastName;
 
 test.use({ storageState: { cookies: [], origins: [] } });
 test.describe.configure({ mode: "serial" });
